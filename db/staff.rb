@@ -1,23 +1,3 @@
-Admin.create!(
-  email: 'admin@example.com',
-  password: '12345678',
-  password_confirmation: '12345678',
-  type: 'Admin'
-)
-
-Staff.create!(
-  email: 'staff@example.com',
-  password: '12345678',
-  password_confirmation: '12345678',
-  type: 'Staff',
-  family_name: '太郎',
-  given_name: '生野',
-  family_name_kana: 'タロウ',
-  given_name_kana: 'イクノ',
-  start_date: 3.days.ago.to_date,
-  end_date: nil,
-  suspended: 0
-)
 family_names = %w[
   佐藤:サトウ:sato
   鈴木:スズキ:suzuki

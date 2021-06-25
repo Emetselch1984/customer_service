@@ -1,8 +1,10 @@
 class Customer::SessionsController < Customer::BaseController
-  def new; end
+  def new
+    @form = Staff::LoginForm.new
+  end
 
   def create
-    @user = login(params[:email], params[:password])
+    @user = login(params[:customer_login_form][:email], params[:customer_login_form][:password])
     if @user
       redirect_back_or_to customer_root_path
     else
