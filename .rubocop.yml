@@ -28,6 +28,8 @@ Style/SpecialGlobalVars:
   Enabled: false
 Style/GuardClause:
   Enabled: false
+Style/NumericPredicate:
+  Enabled: false
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/MethodLength:

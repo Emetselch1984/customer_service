@@ -1,5 +1,5 @@
 table_names = %w[
-  staff staff_events customers
+  staff staff_events customers geust
 ]
 table_names.each do |table|
   path = Rails.root.join('db', "#{table}.rb")
