@@ -1,4 +1,8 @@
 class Customer::SessionsController < Customer::BaseController
+  skip_before_action :require_login, only: %i[new create]
+  skip_before_action :check_timeout, only: %i[new create]
+  skip_before_action :check_account, only: %i[new create]
+
   def new
     @form = Customer::LoginForm.new
     render :new
@@ -7,7 +11,13 @@ class Customer::SessionsController < Customer::BaseController
   def create
     @user = login(params[:customer_login_form][:email], params[:customer_login_form][:password])
     if @user
-      redirect_back_or_to customer_root_path, notice: 'ログインしました'
+      if @user.suspended?
+        flash.alert = 'アカウントが停止されています'
+        render :new
+      else
+        session[:last_access_time] = Time.current
+        redirect_back_or_to customer_root_path, notice: 'ログインしました'
+      end
     else
       flash.now.alert = 'メールまたはアドレスが正しくありません。'
       render :new
@@ -16,6 +26,6 @@ class Customer::SessionsController < Customer::BaseController
 
   def destroy
     logout
-    redirect_to customer_root_path
+    redirect_to customer_login_path, notice: 'ログアウトしました'
   end
 end
