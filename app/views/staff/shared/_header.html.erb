@@ -1,0 +1,9 @@
+<header>
+  <%= link_to "CustomerManagementSystem", staff_root_path, class: "logo-mark" %>
+  <% if logged_in? %>
+    <%= link_to  "ログアウト",staff_logout_path, method: :delete %>
+  <% else %>
+    <%= link_to "ログイン",staff_login_path %>
+  <% end %>
+  <%= link_to "アカウント", staff_account_path if current_user %>
+</header>

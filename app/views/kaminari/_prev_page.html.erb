@@ -1,0 +1,5 @@
+<span class="prev">
+  <%= link_to_unless(current_page.last?, t('views.pagination.previous').html_safe, url) do |name|
+    content_tag(:span,name,class:"disabled")
+  end %>
+</span>

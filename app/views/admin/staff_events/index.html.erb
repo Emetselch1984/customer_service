@@ -1,0 +1,41 @@
+<%
+  if @staff
+    full_name = @staff.family_name + @staff.given_name
+    @title = "#{full_name}さんのログイン・ログアウト記録"
+  else
+    @title = "職員のログイン・ログアウト記録"
+  end
+%>
+<h1><%= @title %></h1>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to "職員一覧", admin_staff_index_path %>
+  </div>
+
+  <%= paginate @events %>
+
+  <table class="listing">
+    <tr>
+      <% unless @staff %><th>氏名</th><% end %>
+      <th>種別</th>
+      <th>日時</th>
+    </tr>
+    <%#= render partial: "admin/staff_events/event",collection: @events %>
+    <% @events.each do |event| %>
+    <%= event.decorate.table_row %>
+    <% end %>
+    <% if @events.empty? %>
+      <tr>
+        <%= content_tag(:td, "記録がありません",
+          colspan: @staff ? 2 : 3, style: "text-align: center") %>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= paginate @events %>
+
+  <div class="links">
+    <%= link_to "職員一覧", admin_staff_index_path %>
+  </div>
+</div>

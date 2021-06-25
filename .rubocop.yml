@@ -1,0 +1,44 @@
+# 日本語でのコメントを許可
+AsciiComments:
+  Enabled: false
+
+# 複数行での「lambda」で「->」による省略記法を許可
+Lambda:
+  Enabled: false
+
+# モジュール名::クラス名の定義を許可
+ClassAndModuleChildren:
+  Enabled: false
+
+# メソッド名のprefixに「set_」「get_」を許可
+AccessorMethodName:
+  Enabled: false
+
+# クラスにコメントを残さない
+Documentation:
+  Enabled: false
+
+# 「and」「or」の使用を許可
+AndOr:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/SpecialGlobalVars:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Max: 10
+Metrics/MethodLength:
+  Max: 12
+Metrics/PerceivedComplexity:
+  Max: 10
+
+AllCops:
+  Exclude:
+    - db/schema.rb
+    - config/unicorn.rb
+    - config/unicorn_staging.rb
+    - config/puma.rb
+    - bin/bundle
+    - bin/yarn
+    - tmp/**/*

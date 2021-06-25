@@ -1,3 +1,35 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  config = Rails.application.config.system_service
+  constraints host: config[:admin][:host] do
+    namespace :admin do
+      root 'top#index'
+      get 'login', to: 'sessions#new'
+      post 'login', to: 'sessions#create'
+      delete 'logout', to: 'sessions#destroy'
+      resources :staff do
+        resources :staff_events, only: %i[index]
+      end
+    end
+  end
+  constraints host: config[:staff][:host] do
+    namespace :staff do
+      root 'top#dashboard'
+      get 'login', to: 'sessions#new'
+      post 'login', to: 'sessions#create'
+      delete 'logout', to: 'sessions#destroy'
+      resource :account do
+        patch :confirm
+      end
+      resource :password, only: %i[show update edit]
+      resources :customers
+    end
+  end
+  constraints host: config[:customer][:host] do
+    namespace :customer do
+      root 'top#index'
+      get 'login', to: 'sessions#new'
+      post 'login', to: 'sessions#create'
+      delete 'logout', to: 'sessions#destroy'
+    end
+  end
 end

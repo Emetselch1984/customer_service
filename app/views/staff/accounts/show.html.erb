@@ -1,0 +1,39 @@
+<% @title = "アカウント情報" %>
+<h1><%= @title %></h1>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to "アカウント情報編集",edit_staff_account_path %>
+  </div>
+  <div class="links">
+    <%= link_to "パスワード変更",edit_staff_password_path %>
+  </div>
+  <table class="attributes">
+    <tr>
+      <th>氏名</th>
+      <td>
+        <%= @staff.family_name %>
+        <%= @staff.given_name %>
+      </td>
+    </tr>
+    <tr>
+      <th>フリガナ</th>
+      <td>
+        <%= @staff.family_name_kana %>
+        <%= @staff.given_name_kana %>
+      </td>
+    </tr>
+    <tr>
+      <th>メールアドレス</th>
+      <td class="email">
+        <%= @staff.email %>
+      </td>
+    </tr>
+    <tr>
+      <th>入社日</th>
+      <td class="date">
+        <%= @staff.start_date.strftime("%Y%m%d") %>
+      </td>
+    </tr>
+  </table>
+</div>

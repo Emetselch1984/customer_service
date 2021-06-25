@@ -1,0 +1,13 @@
+<% @title = "職員情報の編集" %>
+<h1><%= @title %></h1>
+
+<div id="generic-form">
+  <%= form_with model: @staff, url: admin_staff_path(@staff),local: true do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= render "form", f: f %>
+    <div class="buttons">
+      <%= f.submit "更新する" %>
+      <%= link_to "キャンセル", admin_staff_index_path %>
+    </div>
+  <% end %>
+</div>

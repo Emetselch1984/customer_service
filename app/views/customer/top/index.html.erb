@@ -1,0 +1,9 @@
+<% @title = "お客様トップページ" %>
+<h1><%= @title %></h1>
+<% if logged_in? %>
+  <p>ログイン中</p>
+<% else %>
+  <p>ログインしていません</p>
+<% end %>
+<%= link_to "ログイン",customer_login_path %>
+<%= link_to  "ログアウト",customer_logout_path, method: :delete %>

@@ -51,5 +51,5 @@ test:
 production:
   <<: *default
   database: customer_management_system_production
-  username: customer_management_system
-  password: <%= ENV['CUSTOMER_MANAGEMENT_SYSTEM_DATABASE_PASSWORD'] %>
+  username: testuser
+  password:  <%= Settings.dig(:db,:password) %>

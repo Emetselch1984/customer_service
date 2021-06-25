@@ -1,0 +1,10 @@
+<% @title = "職員トップページ" %>
+<h1><%= @title %></h1>
+<%= link_to "アカウント", staff_account_path if logged_in? %>
+<% if logged_in? %>
+  <p>ログイン中</p>
+<% else %>
+  <p>ログインしていません</p>
+<% end %>
+<%= link_to "ログイン",staff_login_path %>
+<%= link_to  "ログアウト",staff_logout_path, method: :delete %>
