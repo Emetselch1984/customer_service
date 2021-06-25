@@ -15,5 +15,7 @@ feature '顧客ログイン画面' do
       fill_in 'パスワード', with: '12345678'
       click_button 'ログイン'
     end
+    expect(page).to have_selector '.notice', text: 'ログインしました'
+    expect(current_path).to eq customer_root_path
   end
 end

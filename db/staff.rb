@@ -30,7 +30,7 @@ given_names = %w[
     family_name_kana: fn[1],
     given_name_kana: gn[1],
     start_date: (100 - n).days.ago.to_date,
-    end_date: n.zero ? Date.today : nil,
+    end_date: n == 0 ? Date.today : nil,
     suspended: n == 1,
     type: 'Staff'
   )
