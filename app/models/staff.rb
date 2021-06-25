@@ -24,7 +24,6 @@ class Staff < User
     before: ->(_obj) { 1.year.from_now.to_date },
     allow_blank: true
   }
-
   def active?
     !suspended? && start_date <= Date.today && (end_date.nil? || end_date > Date.today)
   end

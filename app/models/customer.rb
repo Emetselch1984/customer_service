@@ -19,4 +19,7 @@ class Customer < User
       self.birth_mday = birthday.mday
     end
   end
+  def active?
+    !suspended?
+  end
 end
