@@ -30,6 +30,8 @@ feature '職員による顧客管理' do
     expect(new_customer.gender).to eq('female')
     expect(new_customer.home_address).to be_nil
     expect(new_customer.work_address).to be_nil
+    expect(page).to have_selector '.notice', text: '顧客を追加しました'
+    expect(current_path).to eq staff_customers_path
   end
 
   scenario '職員が顧客、自宅住所、勤務先を追加する' do
@@ -75,6 +77,8 @@ feature '職員による顧客管理' do
     expect(new_customer_address.city).to eq('千代田区')
     expect(new_customer_address.address1).to eq('千代田1-1-1')
     expect(new_customer.work_address.company_name).to eq('テスト')
+    expect(page).to have_selector '.notice', text: '顧客を追加しました'
+    expect(current_path).to eq staff_customers_path
   end
 
   scenario '職員が顧客、自宅住所、勤務先を更新する' do
@@ -94,6 +98,8 @@ feature '職員による顧客管理' do
     expect(customer.email).to eq('test@example.jp')
     expect(customer.home_address.postal_code).to eq('9999999')
     expect(customer.work_address.company_name).to eq('テスト')
+    expect(page).to have_selector '.notice', text: '顧客情報を更新しました'
+    expect(current_path).to eq staff_customers_path
   end
 
   scenario '職員が生年月日と自宅の郵便番号に無効な値を入力する' do
@@ -106,7 +112,7 @@ feature '職員による顧客管理' do
     end
     click_button '更新'
 
-    expect(page).to have_css('span.alert')
+    expect(page).to have_selector 'span.alert', text: '入力に誤りがあります'
     expect(page).to have_css(
       'div.field_with_errors input#form_customer_birthday'
     )
@@ -114,19 +120,20 @@ feature '職員による顧客管理' do
       'div.field_with_errors input#form_home_address_postal_code'
     )
   end
-  #
-  # scenario "職員が勤務先データのない既存顧客に会社名の情報を追加する" do
-  #   customer.work_address.destroy
-  #   click_link "顧客管理"
-  #   first("table.listing").click_link "編集"
-  #
-  #   check "勤務先を入力する"
-  #   within("fieldset#work-address-fields") do
-  #     fill_in "会社名", with: "テスト"
-  #   end
-  #   click_button "更新"
-  #
-  #   customer.reload
-  #   expect(customer.work_address.company_name).to eq("テスト")
-  # end
+  scenario '職員が勤務先データのない既存顧客に会社名の情報を追加する' do
+    customer.work_address.destroy
+    click_link '顧客管理'
+    first('table.listing').click_link '編集'
+
+    check '勤務先を入力する'
+    within('fieldset#work-address-fields') do
+      fill_in '会社名', with: 'テスト'
+    end
+    click_button '更新'
+
+    customer.reload
+    expect(customer.work_address.company_name).to eq('テスト')
+    expect(page).to have_selector '.notice', text: '顧客情報を更新しました'
+    expect(current_path).to eq staff_customers_path
+  end
 end
