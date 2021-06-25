@@ -40,7 +40,7 @@ RSpec.describe Customer, type: :model do
       expect(customer.save).to be_falsey
     end
     it 'emailが256文字以上' do
-      customer = build(:customer, email: 'a' * 256 + '@example.com')
+      customer = build(:customer, email: "#{'a' * 256}@example.com")
       expect(customer.save).to be_falsey
     end
     it 'emailで＠＠などの表記は無効' do

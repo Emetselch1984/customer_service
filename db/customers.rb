@@ -46,17 +46,17 @@ company_names = %w[OIAX ABC XYZ]
     )
     c.personal_phones.create!(number: format('090-0000-%04d', (n * 10 + m))) if m.even?
     c.create_home_address!(
-      postal_code: '%07d' % rand(10_000_000),
+      postal_code: format('%07d', rand(10_000_000)),
       prefecture: Address::PREFECTURE_NAMES.sample,
       city: city_names.sample,
       address1: '開発1-2-3',
       address2: 'レイルズハイツ301号室'
     )
-    c.home_address.phones.create!(number: '03-0000-%04d' % n) if m % 10 == 0
-    next unless m % 3 == 0
+    c.home_address.phones.create!(number: format('03-0000-%04d', n)) if (m % 10).zero?
+    next unless (m % 3).zero?
 
     c.create_work_address!(
-      postal_code: '%07d' % rand(10_000_000),
+      postal_code: format('%07d', rand(10_000_000)),
       prefecture: Address::PREFECTURE_NAMES.sample,
       city: city_names.sample,
       address1: '試験4-5-6',

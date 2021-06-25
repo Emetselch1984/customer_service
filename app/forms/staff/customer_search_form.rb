@@ -13,7 +13,9 @@ class Staff::CustomerSearchForm
     object.result
   end
 
-  private def normalize_values
+  private
+
+  def normalize_values
     self.family_name_kana = normalize_as_furigana(family_name_kana)
     self.given_name_kana = normalize_as_furigana(given_name_kana)
     self.city = normalize_as_name(city)
