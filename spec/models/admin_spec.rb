@@ -21,7 +21,7 @@ RSpec.describe Admin, type: :model do
       expect(admin.save).to be_falsey
     end
     it 'emailが256文字以上' do
-      admin = build(:admin, email: 'a' * 256 + '@example.com')
+      admin = build(:admin, email: "#{'a' * 256}@example.com")
       expect(admin.save).to be_falsey
     end
     it 'emailで＠＠などの表記は無効' do
