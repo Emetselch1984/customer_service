@@ -4,7 +4,7 @@
 # Available submodules are: :user_activation, :http_basic_auth, :remember_me,
 # :reset_password, :session_timeout, :brute_force_protection, :activity_logging,
 # :magic_login, :external
-Rails.application.config.sorcery.submodules = [:core]
+Rails.application.config.sorcery.submodules = %i[core remember_me]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
@@ -309,7 +309,7 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `60 * 60 * 24 * 7`
     #
     # user.remember_me_for =
-
+    #
     # When true, sorcery will persist a single remember me token for all
     # logins/logouts (to support remembering on multiple browsers simultaneously).
     # Default: false
