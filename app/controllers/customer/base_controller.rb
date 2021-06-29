@@ -14,7 +14,7 @@ class Customer::BaseController < ApplicationController
     if current_user && !current_user.active?
       logout
       flash.alert = 'アカウントが無効になりました'
-      redirect_to customer_root_path
+      redirect_to customer_login_path
     end
   end
   TIMEOUT = 60.minutes
