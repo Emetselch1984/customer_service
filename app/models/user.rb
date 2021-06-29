@@ -11,4 +11,7 @@ class User < ApplicationRecord
   has_many :phones, dependent: :destroy
   has_many :personal_phones, -> { where(address_id: nil).order(:id) },
            class_name: 'Phone', autosave: true
+  has_many :entries, dependent: :destroy
+  has_many :programs, through: :entries
+  has_many :programs, foreign_key: 'registrant_id', dependent: :restrict_with_exception
 end

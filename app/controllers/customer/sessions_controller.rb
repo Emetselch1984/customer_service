@@ -30,6 +30,7 @@ class Customer::SessionsController < Customer::BaseController
   end
 
   private
+
   def login_form_params
     params.require(:customer_login_form).permit(:email, :password, :remember)
   end

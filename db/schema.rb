@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_29_101608) do
+ActiveRecord::Schema.define(version: 2021_06_29_102904) do
 
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(version: 2021_06_29_101608) do
     t.index ["type", "prefecture", "city"], name: "index_addresses_on_type_and_prefecture_and_city"
     t.index ["type", "user_id"], name: "index_addresses_on_type_and_user_id", unique: true
     t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "entries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "program_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "approved", default: false, null: false
+    t.boolean "canceled", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["program_id", "user_id"], name: "index_entries_on_program_id_and_user_id", unique: true
+    t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
   create_table "phones", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -100,6 +111,8 @@ ActiveRecord::Schema.define(version: 2021_06_29_101608) do
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "entries", "programs"
+  add_foreign_key "entries", "users"
   add_foreign_key "phones", "addresses"
   add_foreign_key "phones", "users"
   add_foreign_key "programs", "users", column: "registrant_id"
