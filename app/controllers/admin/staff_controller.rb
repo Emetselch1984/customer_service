@@ -36,12 +36,11 @@ class Admin::StaffController < Admin::BaseController
 
   def destroy
     @staff = Staff.find(params[:id])
-    if @staff.delete
+    if @staff.deletable?
       @staff.destroy!
       redirect_to admin_staff_index_path, notice: '削除しました'
     else
-      flash.alert = '削除できませんでした'
-      render :index
+      redirect_to admin_staff_index_path, flash: 'この職員アカウントは削除できません'
     end
   end
 
