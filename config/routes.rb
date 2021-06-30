@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       end
       resource :password, only: %i[show update edit]
       resources :customers
+      resources :programs
     end
   end
   constraints host: config[:customer][:host] do

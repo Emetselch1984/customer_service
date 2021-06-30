@@ -1,6 +1,4 @@
 class CustomerDecorator < ApplicationDecorator
-  delegate_all
-
   def full_name
     "#{object.family_name} #{object.given_name}"
   end
