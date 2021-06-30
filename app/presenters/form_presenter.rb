@@ -5,7 +5,7 @@ class FormPresenter
 
   delegate :label, :text_field, :date_field, :password_field,
            :check_box, :radio_button, :text_area, :object,
-           :search_field, :collection_select,
+           :search_field, :collection_select, :number_field,
            to: :form_builder
 
   def initialize(form_builder, view_context)
@@ -24,6 +24,7 @@ class FormPresenter
     markup(:div, class: 'input-block') do |m|
       m << decorated_label(name, label_text, options)
       m << text_field(name, options)
+      m.span "#{options[:maxlength]}文字以内", class: 'instruction' if options[:maxlength]
       m << error_messages_for(name)
     end
   end
@@ -32,6 +33,18 @@ class FormPresenter
     markup(:div, class: 'input-block') do |m|
       m << decorated_label(name, label_text, options)
       m << search_field(name, options)
+    end
+  end
+
+  def number_field_block(name, label_text, options = {})
+    markup(:div) do |m|
+      m << decorated_label(name, label_text, options)
+      m << form_builder.number_field(name, options)
+      if options[:max]
+        max = view_context.number_with_delimiter(options[:max].to_i)
+        m.span "（最⼤値: #{max}）", class: 'instruction'
+      end
+      m << error_messages_for(name)
     end
   end
 
