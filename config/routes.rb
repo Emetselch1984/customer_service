@@ -40,6 +40,9 @@ Rails.application.routes.draw do
           patch :cancel
         end
       end
+      resource :account, except: %i[new create destroy] do
+        patch :confirm
+      end
     end
   end
 end
