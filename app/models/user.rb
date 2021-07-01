@@ -14,4 +14,7 @@ class User < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :programs, through: :entries
   has_many :programs, foreign_key: 'registrant_id', dependent: :restrict_with_exception
+  has_many :messages
+  has_many :outbound_messages, class_name: 'CustomerMessage', foreign_key: 'user_id'
+  has_many :inbound_messages, class_name: 'StaffMessage', foreign_key: 'user_id'
 end

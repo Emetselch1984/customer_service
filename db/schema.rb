@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_29_102904) do
+ActiveRecord::Schema.define(version: 2021_07_01_105948) do
 
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -39,6 +39,28 @@ ActiveRecord::Schema.define(version: 2021_06_29_102904) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["program_id", "user_id"], name: "index_entries_on_program_id_and_user_id", unique: true
     t.index ["user_id"], name: "index_entries_on_user_id"
+  end
+
+  create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "root_id"
+    t.bigint "parent_id"
+    t.string "type", null: false
+    t.string "status", default: "new", null: false
+    t.string "subject", null: false
+    t.text "body"
+    t.text "remarks"
+    t.boolean "discarded", default: false, null: false
+    t.boolean "deleted", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["parent_id"], name: "fk_rails_aafcb31dbf"
+    t.index ["root_id", "deleted", "created_at"], name: "index_messages_on_root_id_and_deleted_and_created_at"
+    t.index ["type", "user_id"], name: "index_messages_on_type_and_user_id"
+    t.index ["user_id", "deleted", "created_at"], name: "index_messages_on_user_id_and_deleted_and_created_at"
+    t.index ["user_id", "deleted", "status", "created_at"], name: "index_messages_on_c_d_s_c"
+    t.index ["user_id", "discarded", "created_at"], name: "index_messages_on_user_id_and_discarded_and_created_at"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "phones", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -113,6 +135,9 @@ ActiveRecord::Schema.define(version: 2021_06_29_102904) do
   add_foreign_key "addresses", "users"
   add_foreign_key "entries", "programs"
   add_foreign_key "entries", "users"
+  add_foreign_key "messages", "messages", column: "parent_id"
+  add_foreign_key "messages", "messages", column: "root_id"
+  add_foreign_key "messages", "users"
   add_foreign_key "phones", "addresses"
   add_foreign_key "phones", "users"
   add_foreign_key "programs", "users", column: "registrant_id"
