@@ -6,6 +6,7 @@ class Customer::EntryAcceptor
   def accept(program)
     raise if Time.current < program.application_start_time
     return :closed if Time.current >= program.application_end_time
+
     ActiveRecord::Base.transaction do
       program.lock!
       if program.entries.where(user_id: @customer.id).exists?
