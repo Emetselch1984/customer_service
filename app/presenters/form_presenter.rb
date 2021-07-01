@@ -89,6 +89,15 @@ class FormPresenter
     end
   end
 
+  def text_area_block(name, label_text, options = {})
+    markup(:div, class: 'input-block') do |m|
+      m << decorated_label(name, label_text, options)
+      m << text_area(name, options)
+      m.span "#{options[:maxlength]}文字以内", class: 'instruction', style: 'float: right' if options[:maxlength]
+    end
+    m << error_messages_for(name)
+  end
+
   def decorated_label(name, label_text, options = {})
     label(name, label_text, class: options[:required] ? 'required' : nil)
   end
