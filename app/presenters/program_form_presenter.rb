@@ -27,13 +27,15 @@ class ProgramFormPresenter < FormPresenter
     end
   end
 
-  private def hour_options
-    (0..23).map { |h| ['%02d' % h, h] }
+  private
+
+  def hour_options
+    (0..23).map { |h| [format('%02d', h)] }
   end
 
-  private def minute_options
+  def minute_options
     (0..11)
       .map { |n| n * 5 }
-      .map { |m| ['%02d' % m, m] }
+      .map { |m| [format('%02d', m)] }
   end
 end

@@ -33,6 +33,31 @@ class Program < ApplicationRecord
   before_validation :set_application_start_time
   before_validation :set_application_end_time
 
+  validates :title, presence: true, length: { maximum: 32 }
+  validates :description, presence: true, length: { maximum: 800 }
+  validates :application_start_time, date: {
+    after_or_equal_to: Time.zone.local(2000, 1, 1),
+    before: ->(_obj) { 1.year.from_now },
+    allow_blank: true
+  }
+  validates :application_end_time, date: {
+    after: :application_start_time,
+    before: ->(obj) { obj.application_start_time.advance(days: 90) },
+    allow_blank: true,
+    if: ->(obj) { obj.application_start_time }
+  }
+  validates :min_number_of_participants, :max_number_of_participants,
+            numericality: {
+              only_integer: true, greater_than_or_equal_to: 1,
+              less_than_or_equal_to: 1000, allow_nil: true
+            }
+  validate do
+    if min_number_of_participants && max_number_of_participants &&
+       min_number_of_participants > max_number_of_participants
+      errors.add(:max_number_of_participants, :less_than_min_number)
+    end
+  end
+
   private
 
   def set_application_start_time

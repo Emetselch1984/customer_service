@@ -3,6 +3,10 @@ class Staff::ProgramsController < ApplicationController
     @programs = Program.listing.page(params[:page])
   end
 
+  def new
+    @program = Program.new
+  end
+
   def show
     @program = Program.listing.find(params[:id])
   end
@@ -33,6 +37,12 @@ class Staff::ProgramsController < ApplicationController
       flash.now.alert = '⼊⼒に誤りがあります。'
       render :edit
     end
+  end
+
+  def destroy
+    program = Program.find(params[:id])
+    program.destroy!
+    redirect_to staff_programs_path, notice: 'プログラムを削除しました'
   end
 
   private
