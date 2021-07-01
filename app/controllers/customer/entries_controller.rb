@@ -17,7 +17,7 @@ class Customer::EntriesController < Customer::BaseController
     if program.application_end_time.try(:<, Time.current)
       flash.alert = 'プログラムへの申し込みをキャンセルできません（受付期間終了）。'
     else
-      entry = program.entries.find_by!(customer_id: current_user.id)
+      entry = program.entries.find_by!(user_id: current_user.id)
       entry.update_column(:canceled, true)
       flash.notice = 'プログラムへの申し込みをキャンセルしました。'
     end
