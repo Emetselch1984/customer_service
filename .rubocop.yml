@@ -30,6 +30,8 @@ Style/GuardClause:
   Enabled: false
 Style/NumericPredicate:
   Enabled: false
+Lint/AssignmentInCondition:
+  Enabled: false
 Metrics/CyclomaticComplexity:
   Max: 10
 Metrics/MethodLength:

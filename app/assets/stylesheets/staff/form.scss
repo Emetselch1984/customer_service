@@ -56,6 +56,7 @@ div#wrapper {
         div.with-errors {
           label { color: $red; }
           input { background-color: $pink; }
+          select { background-color: $pink; }
         }
         div.error-message {
           color: $red;
