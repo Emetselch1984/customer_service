@@ -1,0 +1,20 @@
+<% @title = "プログラム詳細情報" %>
+<h1><%= @title %></h1>
+
+<div class="table-wrapper">
+  <table class="attributes">
+    <tr><th>タイトル</th><td><%= @program.title %></td></tr>
+    <tr><th>申し込み開始⽇時</th>
+      <td class="date"><%= @program.decorate.application_start_time %></td></tr>
+    <tr><th>申し込み終了⽇時</th>
+      <td class="date"><%= @program.decorate.application_end_time %></td></tr>
+    <tr><th>最⼩参加者数</th>
+      <td class="numeric"><%= @program.decorate.min_number_of_participants %></td></tr>
+    <tr><th>最⼤参加者数</th>
+      <td class="numeric"><%= @program.decorate.max_number_of_participants %></td></tr>
+  </table>
+
+  <div class="description"><%= @program.description %></div>
+
+<!--  <div><%#= p.apply_or_cancel_button %></div>-->
+</div>
