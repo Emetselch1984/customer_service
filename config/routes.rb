@@ -27,6 +27,7 @@ Rails.application.routes.draw do
           patch :update_all, on: :collection
         end
       end
+      get 'message/count', to: 'ajax#message_count'
     end
   end
   constraints host: config[:customer][:host] do
