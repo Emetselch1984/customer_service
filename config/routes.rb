@@ -22,7 +22,11 @@ Rails.application.routes.draw do
       end
       resource :password, only: %i[show update edit]
       resources :customers
-      resources :programs
+      resources :programs do
+        resources :entries, only: [] do
+          patch :update_all, on: :collection
+        end
+      end
     end
   end
   constraints host: config[:customer][:host] do
