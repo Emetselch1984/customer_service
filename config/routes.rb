@@ -35,7 +35,11 @@ Rails.application.routes.draw do
       get 'login', to: 'sessions#new'
       post 'login', to: 'sessions#create'
       delete 'logout', to: 'sessions#destroy'
-      resources :programs , only: %i[index show]
+      resources :programs, only: %i[index show] do
+        resource :entry, only: %i[create] do
+          patch :cancel
+        end
+      end
     end
   end
 end

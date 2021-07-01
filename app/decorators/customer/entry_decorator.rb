@@ -1,4 +1,4 @@
-class Customer::ProgramDecorator < ApplicationDecorator
+class Customer::EntryDecorator < ApplicationDecorator
   delegate_all
 
   # Define presentation-specific methods here. Helpers are accessed through
