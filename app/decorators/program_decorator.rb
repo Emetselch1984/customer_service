@@ -23,42 +23,46 @@ class ProgramDecorator < ApplicationDecorator
     "#{object.registrant.family_name} #{object.registrant.given_name}"
   end
 
-  # def apply_or_cancel_button
-  #   if entry = object.entries.find_by(customer_id: current_customer.id)
-  #     status = cancellation_status(entry)
-  #     button_to cancel_button_label_text(status),
-  #               [:cancel, :customer, object, :entry],
-  #               disabled: status != :cancellable, method: :patch,
-  #               data: { confirm: '本当にキャンセルしますか？ ' }
-  #   else
-  #     status = program_status
-  #     button_to button_label_text(status), [:customer, object, :entry],
-  #               disabled: status != :available, method: :post,
-  #               data: { confirm: '本当に申し込みますか？ ' }
-  #   end
-  # end
+  def apply_or_cancel_button
+    if false
+    # TODO: 後でキャンセルボタンの表示
+    # if entry = object.entries.find_by(customer_id: current_customer.id)
+    #   status = cancellation_status(entry)
+    #   button_to cancel_button_label_text(status),
+    #             [:cancel, :customer, object, :entry],
+    #             disabled: status != :cancellable, method: :patch,
+    #             data: { confirm: '本当にキャンセルしますか？ ' }
+    else
+      status = program_status
+      h.button_to button_label_text(status), [:customer, object, :entry],
+                  disabled: status != :available, method: :post,
+                  data: { confirm: '本当に申し込みますか？ ' }
+    end
+  end
 
-  # private def program_status
-  #   if object.application_end_time.try(:<, Time.current)
-  #     :closed
-  #   elsif object.max_number_of_participants.try(:<=, object.applicants.count)
-  #     :full
-  #   else
-  #     :available
-  #   end
-  # end
-  #
-  # private def button_label_text(status)
-  #   case status
-  #   when :closed
-  #     '募集終了'
-  #   when :full
-  #     '満員'
-  #   else
-  #     '申し込む'
-  #   end
-  # end
-  #
+  private
+
+  def program_status
+    if object.application_end_time.try(:<, Time.current)
+      :closed
+    elsif object.max_number_of_participants.try(:<=, object.applicants.count)
+      :full
+    else
+      :available
+    end
+  end
+
+  def button_label_text(status)
+    case status
+    when :closed
+      '募集終了'
+    when :full
+      '満員'
+    else
+      '申し込む'
+    end
+  end
+
   # private def cancellation_status(entry)
   #   if object.application_end_time.try(:<, Time.current)
   #     :closed

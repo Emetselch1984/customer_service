@@ -10,7 +10,7 @@ class Program < ApplicationRecord
       .includes(:registrant)
   }
   scope :published, -> {
-    where("application_start_time <= ?",Time.current).order(application_start_time: :desc)
+    where('application_start_time <= ?', Time.current).order(application_start_time: :desc)
   }
   attribute :application_start_date, :date, default: Date.today
   attribute :application_start_hour, :integer, default: 9
