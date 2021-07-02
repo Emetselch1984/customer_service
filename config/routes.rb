@@ -28,6 +28,9 @@ Rails.application.routes.draw do
         end
       end
       get 'message/count', to: 'ajax#message_count'
+      resources :messages, only: %i[index show destroy] do
+        get :inbound, :outbound, :deleted, on: :collection
+      end
     end
   end
   constraints host: config[:customer][:host] do
@@ -44,7 +47,7 @@ Rails.application.routes.draw do
       resource :account, except: %i[new create destroy] do
         patch :confirm
       end
-      resources :messages, only: %i[new create] do
+      resources :messages, only: %i[new create show] do
         post :confirm, on: :collection
       end
     end
