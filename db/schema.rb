@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_01_105948) do
+ActiveRecord::Schema.define(version: 2021_07_02_000938) do
 
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_105948) do
     t.boolean "deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "staff_id"
     t.index ["parent_id"], name: "fk_rails_aafcb31dbf"
     t.index ["root_id", "deleted", "created_at"], name: "index_messages_on_root_id_and_deleted_and_created_at"
     t.index ["type", "user_id"], name: "index_messages_on_type_and_user_id"
