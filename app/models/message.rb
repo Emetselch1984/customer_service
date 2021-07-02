@@ -3,6 +3,7 @@ class Message < ApplicationRecord
   belongs_to :staff, class_name: 'User', foreign_key: 'staff_id', optional: true
   belongs_to :root, class_name: 'Message', foreign_key: 'root_id', optional: true
   belongs_to :parent, class_name: 'Message', foreign_key: 'parent_id', optional: true
+  has_many :children, class_name: 'Message', foreign_key: 'parent_id', dependent: :destroy
 
   before_validation do
     if parent

@@ -3,6 +3,10 @@ class Staff::MessagesController < Staff::BaseController
     @messages = Message.not_deleted.sorted.page(params[:page])
   end
 
+  def show
+    @message = Message.find(params[:id])
+  end
+
   def inbound
     @messages = CustomerMessage.not_deleted.sorted.page(params[:page])
     render :index
