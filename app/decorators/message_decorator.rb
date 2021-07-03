@@ -51,7 +51,7 @@ class MessageDecorator < ApplicationDecorator
   end
 
   def tree
-    expand(object.root || object)
+    expand(object.tree.root)
   end
 
   def formatted_body
@@ -68,7 +68,7 @@ class MessageDecorator < ApplicationDecorator
         else
           m << h.link_to(node.subject, h.staff_message_path(node))
         end
-        node.children.each do |c|
+        node.child_nodes.each do |c|
           m << expand(c)
         end
       end
