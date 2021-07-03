@@ -30,6 +30,9 @@ Rails.application.routes.draw do
       get 'message/count', to: 'ajax#message_count'
       resources :messages, only: %i[index show destroy] do
         get :inbound, :outbound, :deleted, on: :collection
+        resource :reply, only: %i[new create] do
+          post :confirm
+        end
       end
     end
   end
