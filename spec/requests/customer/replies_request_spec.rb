@@ -1,5 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe "Customer::Replies", type: :request do
-
+RSpec.describe 'Customer::Replies', type: :request do
 end
