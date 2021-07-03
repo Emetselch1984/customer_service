@@ -7,9 +7,12 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import 'bootstrap';
+import '../stylesheets/application';
 import "../staff/customer_form"
 import "../staff/entries_form"
 import "../staff/messages"
+import "../staff/tags"
 
 Rails.start()
 Turbolinks.start()

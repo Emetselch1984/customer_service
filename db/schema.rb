@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_02_000938) do
+ActiveRecord::Schema.define(version: 2021_07_03_102043) do
 
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -39,6 +39,16 @@ ActiveRecord::Schema.define(version: 2021_07_02_000938) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["program_id", "user_id"], name: "index_entries_on_program_id_and_user_id", unique: true
     t.index ["user_id"], name: "index_entries_on_user_id"
+  end
+
+  create_table "message_tag_links", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "message_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["message_id", "tag_id"], name: "index_message_tag_links_on_message_id_and_tag_id", unique: true
+    t.index ["message_id"], name: "index_message_tag_links_on_message_id"
+    t.index ["tag_id"], name: "index_message_tag_links_on_tag_id"
   end
 
   create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -97,6 +107,13 @@ ActiveRecord::Schema.define(version: 2021_07_02_000938) do
     t.datetime "created_at", null: false
     t.index ["created_at"], name: "index_staff_events_on_created_at"
     t.index ["user_id", "created_at"], name: "index_staff_events_on_user_id_and_created_at"
+  end
+
+  create_table "tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "value", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["value"], name: "index_tags_on_value", unique: true
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
