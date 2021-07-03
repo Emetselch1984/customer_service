@@ -1,5 +1,5 @@
 <header>
-  <span class="logo-mark"> CustomerManagementSystem</span>
+  <%= link_to "CustomerManagementSystem",customer_root_path,class: "logo-mark" %>
   <% if logged_in? %>
     <%= link_to  "ログアウト",customer_logout_path, method: :delete %>
   <% else %>

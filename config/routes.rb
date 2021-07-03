@@ -50,8 +50,11 @@ Rails.application.routes.draw do
       resource :account, except: %i[new create destroy] do
         patch :confirm
       end
-      resources :messages, only: %i[new create show] do
+      resources :messages, only: %i[index new create show destroy] do
         post :confirm, on: :collection
+        resource :reply, only: %i[new create] do
+          post :confirm
+        end
       end
     end
   end

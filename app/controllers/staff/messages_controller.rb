@@ -23,7 +23,7 @@ class Staff::MessagesController < Staff::BaseController
   end
 
   def destroy
-    message = CustomerMessage.find(params[:id])
+    message = StaffMessage.find(params[:id])
     message.update_column(:deleted, true)
     flash.notice = '問い合わせを削除しました'
     redirect_back(fallback_location: :staff_root)
