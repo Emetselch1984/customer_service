@@ -29,16 +29,15 @@ Rails.application.routes.draw do
       end
       get 'message/count', to: 'ajax#message_count'
       resources :messages, only: %i[index show destroy] do
-        get :inbound, :outbound,  on: :collection
+        get :inbound, :outbound, on: :collection
+        patch :all_read,on: :collection
         resource :reply, only: %i[new create] do
           post :confirm
         end
       end
       resources :box_garbages do
-        delete :all_destroy,on: :collection
+        delete :all_destroy, on: :collection
       end
-
-
     end
   end
   constraints host: config[:customer][:host] do
