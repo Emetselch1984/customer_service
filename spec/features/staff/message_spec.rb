@@ -27,7 +27,7 @@ feature '職員による問い合わせ機能' do
   end
   scenario 'メッセージ詳細画面' do
     click_link '問い合わせ一覧'
-    first("td.actions").click_link '詳細'
+    first('td.actions').click_link '詳細'
     expect(current_path).to eq staff_message_path(CustomerMessage.last)
     expect(page).to have_content 'メッセージ詳細'
     expect(page).to have_content '山田 太郎'

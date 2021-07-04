@@ -1,0 +1,34 @@
+<% @title = "ゴミ箱" %>
+<h1><%= @title %></h1>
+<div class="table-wrapper">
+  <%= paginate @messages %>
+
+  <table class="listing">
+    <%= link_to "ゴミ箱のメールを全て削除する", all_destroy_staff_box_garbages_path,method: :delete,
+                data: { confirm: "本当に削除しますか？ " } %>
+    <tr>
+      <th>種類</th>
+      <th>送信者</th>
+      <th>受信者</th>
+      <th>件名</th>
+      <th>作成⽇時</th>
+      <th>アクション</th>
+    </tr>
+    <% @messages.each do |m| %>
+      <tr>
+        <td><%= m.decorate.type %></td>
+        <td><%= m.decorate.sender %></td>
+        <td><%= m.decorate.receiver %></td>
+        <td><%= m.decorate.truncated_subject %></td>
+        <td><%= m.decorate.created_at %></td>
+        <td class="actions">
+          <%= link_to "詳細", staff_message_path(m) %>
+          <%= link_to "削除", staff_box_garbage_path(m), method: :delete,
+            data: { confirm: "本当に削除しますか？ " } %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+<%= paginate @messages %>
+</div>
