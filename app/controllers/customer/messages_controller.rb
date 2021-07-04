@@ -2,7 +2,6 @@ class Customer::MessagesController < Customer::BaseController
   def new
     @message = CustomerMessage.new
   end
-
   def index
     @messages = current_user.inbound_messages.where(discarded: false).sorted.page(params[:page])
   end
@@ -39,8 +38,8 @@ class Customer::MessagesController < Customer::BaseController
 
   def destroy
     message = current_user.inbound_messages.find(params[:id])
-    message.update_column(:discarded, true)
-    flash.notice = 'メッセージを削除しました'
+    message.update_column(:discarded ,true)
+    flash.notice = "メッセージを削除しました"
     redirect_back(fallback_location: :customer_messages)
   end
 
