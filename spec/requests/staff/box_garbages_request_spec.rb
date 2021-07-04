@@ -1,5 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe "Staff::BoxGarbages", type: :request do
-
+RSpec.describe 'Staff::BoxGarbages', type: :request do
 end

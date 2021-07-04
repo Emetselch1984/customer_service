@@ -2,6 +2,7 @@
 <h1><%= @title %></h1>
 
 <div class="table-wrapper">
+  <%= link_to "全て既読にする",all_read_staff_messages_path ,method: :patch%>
   <%= paginate @messages %>
 
   <table class="listing">

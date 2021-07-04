@@ -5,6 +5,7 @@ class Staff::MessagesController < Staff::BaseController
 
   def show
     @message = Message.find(params[:id])
+    @message.update_column(:status, "read")
   end
 
   def inbound
@@ -15,6 +16,12 @@ class Staff::MessagesController < Staff::BaseController
   def outbound
     @messages = StaffMessage.not_deleted.sorted.page(params[:page])
     render :index
+  end
+  def all_read
+    messages = Message.not_deleted
+    messages.each do |message|
+      message.update_column(:status, "read")
+    end
   end
 
   def destroy
