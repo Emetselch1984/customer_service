@@ -4,8 +4,13 @@
   <li>
     <%= link_to "プログラム一覧",customer_programs_path %>
   </li>
-  <li>
-    <%= link_to "受信メッセージ一覧",customer_messages_path %>
+  <li>メッセージ管理
+    <ul>
+      <li><%= link_to "送信メッセージ一覧", outbound_customer_messages_path %></li>
+      <li><%= link_to "受信メッセージ一覧", inbound_customer_messages_path %></li>
+      <li><%= link_to "全メッセージ一覧", customer_messages_path %></li>
+      <li><%= link_to "ゴミ箱",customer_box_garbages_path %></li>
+    </ul>
   </li>
 
 </ul>

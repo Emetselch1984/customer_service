@@ -1,4 +1,4 @@
-class Staff::BoxGarbagesController < ApplicationController
+class Staff::BoxGarbagesController < Staff::BaseController
   def index
     @messages = Message.deleted.sorted.page(params[:page])
   end

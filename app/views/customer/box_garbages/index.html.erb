@@ -5,7 +5,8 @@
   <%= paginate @messages %>
 
   <table class="listing">
-    <%= link_to "全て既読にする",all_read_customer_messages_path ,method: :patch%>
+    <%= link_to "ゴミ箱のメールを全て削除する", all_destroy_customer_box_garbages_path,method: :delete,
+                data: { confirm: "本当に削除しますか？ " } %>
     <tr>
       <th>送信者</th>
       <th>件名</th>
