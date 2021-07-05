@@ -17,4 +17,6 @@ class Message < ApplicationRecord
   scope :not_deleted, -> { where(deleted: false) }
   scope :deleted, -> { where(deleted: true) }
   scope :sorted, -> { order(created_at: :desc) }
+  scope :not_discarded, -> { where(discarded: false) }
+  scope :discarded, -> { where(discarded: true) }
 end
