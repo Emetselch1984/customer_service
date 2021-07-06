@@ -20,7 +20,7 @@ feature '顧客の受信メッセージ画面' do
 
   scenario '受信メッセージ画面の表示' do
     click_link '受信メッセージ一覧'
-    expect(current_path).to eq customer_messages_path
+    expect(current_path).to eq inbound_customer_messages_path
 
   end
   # scenario 'メッセージ詳細画面の表示' do

@@ -1,11 +1,6 @@
 class Staff < User
   include EmailHolder
   include PersonalNameHolder
-  before_validation do
-    self.email = normalize_as_email(email)
-  end
-  validates :email, presence: true, "valid_email_2/email": true,
-                    uniqueness: { case_sensitive: false }, length: { maximum: 256 }
   validates :family_name, length: { maximum: 256 }
   validates :family_name, presence: true
   validates :family_name_kana, length: { maximum: 256 }
