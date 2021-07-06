@@ -9,12 +9,14 @@ class Customer::MessagesController < Customer::BaseController
 
   def show
     @message = current_user.messages.find(params[:id])
-    @message.update_column(:status, "read")
+    @message.update_column(:status, 'read')
   end
+
   def inbound
     @messages = current_user.inbound_messages.where(discarded: false).sorted.page(params[:page])
     render :index
   end
+
   def outbound
     @messages = current_user.outbound_messages.where(discarded: false).sorted.page(params[:page])
     render :index
@@ -52,25 +54,27 @@ class Customer::MessagesController < Customer::BaseController
     flash.notice = 'メッセージを削除しました'
     redirect_back(fallback_location: :customer_messages)
   end
+
   def all_read
     messages = current_user.messages.where(discarded: false)
     messages.each do |message|
-      message.update_column(:status, "read")
-    end
-  end
-  def inbound_all_read
-    messages = current_user.inbound_messages.where(discarded: false)
-    messages.each do |message|
-      message.update_column(:status, "read")
-    end
-  end
-  def outbound_all_read
-    messages = current_user.outbound_messages.where(discarded: false)
-    messages.each do |message|
-      message.update_column(:status, "read")
+      message.update_column(:status, 'read')
     end
   end
 
+  def inbound_all_read
+    messages = current_user.inbound_messages.where(discarded: false)
+    messages.each do |message|
+      message.update_column(:status, 'read')
+    end
+  end
+
+  def outbound_all_read
+    messages = current_user.outbound_messages.where(discarded: false)
+    messages.each do |message|
+      message.update_column(:status, 'read')
+    end
+  end
 
   private
 

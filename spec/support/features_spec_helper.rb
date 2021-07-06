@@ -12,6 +12,7 @@ module FeaturesSpecHelper
       click_button 'ログイン'
     end
   end
+
   def login_as_customer(customer, password = '12345678')
     visit customer_login_path
     within('#login-form') do

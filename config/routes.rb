@@ -30,9 +30,9 @@ Rails.application.routes.draw do
       get 'message/count', to: 'ajax#message_count'
       resources :messages, only: %i[index show destroy] do
         get :inbound, :outbound, on: :collection
-        patch :all_read,on: :collection
-        patch :inbound_all_read,on: :collection
-        patch :outbound_all_read,on: :collection
+        patch :all_read, on: :collection
+        patch :inbound_all_read, on: :collection
+        patch :outbound_all_read, on: :collection
         resource :reply, only: %i[new create] do
           post :confirm
         end
@@ -58,9 +58,9 @@ Rails.application.routes.draw do
       end
       resources :messages, only: %i[index new create show destroy] do
         get :inbound, :outbound, on: :collection
-        patch :all_read,on: :collection
-        patch :inbound_all_read,on: :collection
-        patch :outbound_all_read,on: :collection
+        patch :all_read, on: :collection
+        patch :inbound_all_read, on: :collection
+        patch :outbound_all_read, on: :collection
         post :confirm, on: :collection
         resource :reply, only: %i[new create] do
           post :confirm
