@@ -19,12 +19,13 @@ module StaffHelper
       end
     end
   end
+
   def staff_message_title
     case params[:action]
-    when "index"; "全メッセージ一覧"
-    when "inbound"; "問い合わせ一覧"
-    when "outbound"; "返信一覧"
-    when "deleted"; "ゴミ箱"
+    when 'index' then '全メッセージ一覧'
+    when 'inbound' then '問い合わせ一覧'
+    when 'outbound' then '返信一覧'
+    when 'deleted' then 'ゴミ箱'
     else; raise
     end
   end

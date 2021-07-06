@@ -23,5 +23,5 @@ class Address < ApplicationRecord
   ].freeze
   validates :postal_code, format: { with: /\A\d{7}\z/, allow_blank: true }
   validates :prefecture, inclusion: { in: PREFECTURE_NAMES, allow_blank: true }
-  validates :city, :address1, :address2,length: {maximum: 300}
+  validates :city, :address1, :address2, length: { maximum: 300 }
 end

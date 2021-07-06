@@ -19,21 +19,23 @@ module CustomerHelper
       end
     end
   end
+
   def customer_message_title
     case params[:action]
-    when "index"; "全メッセージ一覧"
-    when "inbound"; "受信メッセージ一覧"
-    when "outbound"; "送信メッセージ一覧"
-    when "deleted"; "ゴミ箱"
+    when 'index' then '全メッセージ一覧'
+    when 'inbound' then '受信メッセージ一覧'
+    when 'outbound' then '送信メッセージ一覧'
+    when 'deleted' then 'ゴミ箱'
     else; raise
     end
   end
+
   def customer_message_title
     case params[:action]
-    when "index"; "全メッセージ一覧"
-    when "inbound"; "受信メッセージ一覧"
-    when "outbound"; "送信メッセージ一覧"
-    when "deleted"; "ゴミ箱"
+    when 'index' then '全メッセージ一覧'
+    when 'inbound' then '受信メッセージ一覧'
+    when 'outbound' then '送信メッセージ一覧'
+    when 'deleted' then 'ゴミ箱'
     else; raise
     end
   end
