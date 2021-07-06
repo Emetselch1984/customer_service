@@ -24,6 +24,19 @@ class Staff::MessagesController < Staff::BaseController
     end
   end
 
+  def inbound_all_read
+    messages = CustomerMessage.not_deleted
+    messages.each do |message|
+      message.update_column(:status, "read")
+    end
+  end
+  def outbound_all_read
+    messages = current_user.outbound_messages.not_deleted
+    messages.each do |message|
+      message.update_column(:status, "read")
+    end
+  end
+
   def destroy
     message = StaffMessage.find(params[:id])
     message.update_column(:deleted, true)

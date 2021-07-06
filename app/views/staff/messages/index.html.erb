@@ -1,8 +1,12 @@
-<% @title = "受信メッセージ⼀覧" %>
+<% @title =
+     staff_message_title
+%>
 <h1><%= @title %></h1>
 
 <div class="table-wrapper">
   <%= link_to "全て既読にする",all_read_staff_messages_path ,method: :patch%>
+
+  <%= staff_patch_path %>
   <%= paginate @messages %>
 
   <table class="listing">
