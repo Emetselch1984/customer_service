@@ -22,6 +22,7 @@ class Staff::MessagesController < Staff::BaseController
     messages.each do |message|
       message.update_column(:status, "read")
     end
+    redirect_to staff_messages_path
   end
 
   def inbound_all_read

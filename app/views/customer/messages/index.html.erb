@@ -1,11 +1,11 @@
-<% @title = "全メッセージ⼀覧" %>
+<% @title = customer_message_title %>
 <h1><%= @title %></h1>
 
 <div class="table-wrapper">
   <%= paginate @messages %>
 
   <table class="listing">
-    <%= link_to "全て既読にする",all_read_customer_messages_path ,method: :patch%>
+    <%= render "all_read_link",params: params[:action] %>
     <tr>
       <th>送信者</th>
       <th>件名</th>
