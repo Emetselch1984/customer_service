@@ -31,6 +31,8 @@ Rails.application.routes.draw do
       resources :messages, only: %i[index show destroy] do
         get :inbound, :outbound, on: :collection
         patch :all_read,on: :collection
+        patch :inbound_all_read,on: :collection
+        patch :outbound_all_read,on: :collection
         resource :reply, only: %i[new create] do
           post :confirm
         end

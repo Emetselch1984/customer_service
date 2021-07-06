@@ -1,4 +1,5 @@
 class MessageDecorator < ApplicationDecorator
+
   def type
     case object
     when CustomerMessage
