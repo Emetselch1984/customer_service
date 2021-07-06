@@ -14,5 +14,7 @@ class Phone < ApplicationRecord
   end
 
   validates :number,
-            format: { with: /\A\+?\d+(-\d+)*\z/, allow_blank: true }
+            format: { with: /\A\+?\d+(-\d+)*\z/, allow_blank: true },
+            length: {maximum: 30}
+
 end
