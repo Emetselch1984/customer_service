@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   layout :set_layout
 
-  include ErrorHandlers
+  # include ErrorHandlers
 
   private
 
