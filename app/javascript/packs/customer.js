@@ -8,6 +8,7 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "../customer/account_form"
+import "../customer/messages"
 
 Rails.start()
 Turbolinks.start()

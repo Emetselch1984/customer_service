@@ -56,6 +56,7 @@ Rails.application.routes.draw do
       resource :account, except: %i[new create destroy] do
         patch :confirm
       end
+      get 'message/count', to: 'ajax#message_count'
       resources :messages, only: %i[index new create show destroy] do
         get :inbound, :outbound, on: :collection
         patch :all_read, on: :collection

@@ -60,6 +60,7 @@ class Customer::MessagesController < Customer::BaseController
     messages.each do |message|
       message.update_column(:status, 'read')
     end
+    redirect_to customer_messages_path
   end
 
   def inbound_all_read
@@ -67,13 +68,7 @@ class Customer::MessagesController < Customer::BaseController
     messages.each do |message|
       message.update_column(:status, 'read')
     end
-  end
-
-  def outbound_all_read
-    messages = current_user.outbound_messages.where(discarded: false)
-    messages.each do |message|
-      message.update_column(:status, 'read')
-    end
+    redirect_to inbound_customer_messages_path
   end
 
   private
