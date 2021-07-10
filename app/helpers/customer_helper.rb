@@ -1,10 +1,10 @@
 module CustomerHelper
   include HtmlBuilder
 
-  def number_of_unprocessed_messages
+  def number_of_staff_unprocessed_messages
     markup do |m|
       m.a(href: inbound_customer_messages_path) do
-        m << '新規問い合わせ'
+        m << '受信メッセージ'
         anchor_text =
           if (c = StaffMessage.unprocessed.count) > 0
             "(#{c})"
@@ -13,7 +13,7 @@ module CustomerHelper
           end
         m.span(
           anchor_text,
-          id: 'number-of-unprocessed-staff-messages',
+          id: 'number-of-staff-unprocessed-messages',
           'data-path' => customer_message_count_path
         )
       end

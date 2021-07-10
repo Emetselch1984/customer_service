@@ -6,5 +6,7 @@
     <%= link_to "ログイン",customer_login_path %>
   <% end %>
   <%= link_to "アカウント", customer_account_path if current_user %>
+  <%= number_of_staff_unprocessed_messages if current_user %>
   <%= link_to "問い合わせ" ,new_customer_message_path if current_user %>
+
 </header>
