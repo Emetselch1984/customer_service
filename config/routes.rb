@@ -67,7 +67,7 @@ Rails.application.routes.draw do
           post :confirm
         end
       end
-      resources :box_garbages do
+      resources :box_garbages,only: %i[index destroy] do
         delete :all_destroy, on: :collection
       end
     end

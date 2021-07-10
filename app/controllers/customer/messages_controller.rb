@@ -49,9 +49,9 @@ class Customer::MessagesController < Customer::BaseController
   end
 
   def destroy
-    message = current_user.inbound_messages.find(params[:id])
+    message = current_user.messages.find(params[:id])
     message.update_column(:discarded, true)
-    flash.notice = 'メッセージを削除しました'
+    flash.notice = 'ゴミ箱に移動しました'
     redirect_back(fallback_location: :customer_messages)
   end
 

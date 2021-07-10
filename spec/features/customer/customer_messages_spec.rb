@@ -22,11 +22,5 @@ feature '顧客の受信メッセージ画面' do
     click_link '受信メッセージ一覧'
     expect(current_path).to eq inbound_customer_messages_path
   end
-  # scenario 'メッセージ詳細画面の表示' do
-  #   click_link '問い合わせ一覧'
-  #   first('td.actions').click_link '詳細'
-  #   expect(current_path).to eq staff_message_path(CustomerMessage.last)
-  #   expect(page).to have_content 'メッセージ詳細'
-  #   expect(page).to have_content '山田 太郎'
-  # end
+
 end

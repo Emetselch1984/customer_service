@@ -41,7 +41,7 @@ class Staff::MessagesController < Staff::BaseController
   end
 
   def destroy
-    message = StaffMessage.find(params[:id])
+    message = Message.find(params[:id])
     message.update_column(:deleted, true)
     flash.notice = 'ゴミ箱に移動しました'
     redirect_back(fallback_location: :staff_root)
