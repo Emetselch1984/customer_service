@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Program, type: :model do
-  let(:staff) {create(:staff)}
-  let(:args) {
+  let(:staff) { create(:staff) }
+  let(:args) do
     {
-      title: "test" ,
-      description: "test" ,
-      application_start_time: Time.new(2021,7,5,12,15),
-      application_end_time: Time.new(2021,7,12,12,15),
+      title: 'test',
+      description: 'test',
+      application_start_time: Time.new(2021, 7, 5, 12, 15),
+      application_end_time: Time.new(2021, 7, 12, 12, 15),
       min_number_of_participants: '3',
       max_number_of_participants: '6'
     }
-  }
+  end
   describe 'バリデーション' do
     it 'programを保存' do
       program = staff.programs.build(args)
@@ -27,7 +27,7 @@ RSpec.describe Program, type: :model do
     end
     it 'titleの長さが33文字' do
       program = staff.programs.build(args.merge({
-                                                  title: "a" * 33
+                                                  title: 'a' * 33
                                                 }))
       expect(program).not_to be_valid
     end
@@ -40,13 +40,13 @@ RSpec.describe Program, type: :model do
 
     it 'descriptionの長さが801文字' do
       program = staff.programs.build(args.merge({
-                                                  description: "a" * 801
+                                                  description: 'a' * 801
                                                 }))
       expect(program).not_to be_valid
     end
     it '申し込み日が2000年1月1より前' do
       program = staff.programs.build(args.merge({
-                                                  application_start_date: Time.new(1999,12,31)
+                                                  application_start_date: Time.new(1999, 12, 31)
                                                 }))
       expect(program).not_to be_valid
     end
@@ -58,13 +58,13 @@ RSpec.describe Program, type: :model do
     end
     it '申し込み終了日が申し込み開始日より前' do
       program = staff.programs.build(args.merge({
-                                                  application_start_date: Time.new(2021,7,5,12,15),
-                                                  application_end_date: Time.new(2021,7,4,12,15)
+                                                  application_start_date: Time.new(2021, 7, 5, 12, 15),
+                                                  application_end_date: Time.new(2021, 7, 4, 12, 15)
                                                 }))
       expect(program).not_to be_valid
     end
     it '申し込み終了日が申し込み開始日より91日後' do
-      time = Time.new(2021,7,5,12,15)
+      time = Time.new(2021, 7, 5, 12, 15)
       program = staff.programs.build(args.merge({
                                                   application_start_date: time,
                                                   application_end_date: time.advance(days: 91)
@@ -99,6 +99,5 @@ RSpec.describe Program, type: :model do
                                                 }))
       expect(program).not_to be_valid
     end
-    
   end
 end
