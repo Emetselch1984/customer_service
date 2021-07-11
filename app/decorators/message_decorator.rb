@@ -51,10 +51,10 @@ class MessageDecorator < ApplicationDecorator
   end
 
   def tree
-    expand(object.root || object)
+    expand(object.tree.root)
   end
   def customer_tree
-    customer_expand(object.root || object)
+    customer_expand(object.tree.root)
   end
 
 
@@ -72,7 +72,7 @@ class MessageDecorator < ApplicationDecorator
         else
           m << h.link_to(node.subject, h.staff_message_path(node))
         end
-        node.children.each do |c|
+        node.child_nodes.each do |c|
           m << expand(c)
         end
       end
@@ -86,7 +86,7 @@ class MessageDecorator < ApplicationDecorator
         else
           m << h.link_to(node.subject, h.customer_message_path(node))
         end
-        node.children.each do |c|
+        node.child_nodes.each do |c|
           m << customer_expand(c)
         end
       end
