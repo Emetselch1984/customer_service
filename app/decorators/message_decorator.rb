@@ -53,6 +53,10 @@ class MessageDecorator < ApplicationDecorator
   def tree
     expand(object.root || object)
   end
+  def customer_tree
+    customer_expand(object.root || object)
+  end
+
 
   def formatted_body
     ERB::Util.html_escape(body).gsub(/\n/, '<br>').html_safe
@@ -74,4 +78,19 @@ class MessageDecorator < ApplicationDecorator
       end
     end
   end
+  def customer_expand(node)
+    markup(:ul) do |m|
+      m.li do
+        if node.id == object.id
+          m.strong(node.subject)
+        else
+          m << h.link_to(node.subject, h.customer_message_path(node))
+        end
+        node.children.each do |c|
+          m << customer_expand(c)
+        end
+      end
+    end
+  end
+
 end
