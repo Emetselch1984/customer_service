@@ -3,7 +3,6 @@ class Message < ApplicationRecord
   belongs_to :staff, class_name: 'User', foreign_key: 'staff_id', optional: true
   belongs_to :root, class_name: 'Message', foreign_key: 'root_id', optional: true
   belongs_to :parent, class_name: 'Message', foreign_key: 'parent_id', optional: true
-  has_many :children, class_name: 'Message', foreign_key: 'parent_id', dependent: :destroy
 
   before_validation do
     if parent
@@ -19,4 +18,16 @@ class Message < ApplicationRecord
   scope :sorted, -> { order(created_at: :desc) }
   scope :not_discarded, -> { where(discarded: false) }
   scope :discarded, -> { where(discarded: true) }
+
+  attr_accessor :child_nodes
+
+  def tree
+    return @tree if @tree
+    r = root || self
+    messages = Message.where(root_id: r.id).select(:id,:parent_id,:subject)
+    @tree = SimpleTree.new(r,messages)
+
+  end
+
+
 end
